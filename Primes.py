@@ -20,38 +20,33 @@ if temp!= '':
     datasource[counter] = temp
 
 def mapfn(k, v):
-    def isPrime(n):
-        if n==2 or n==3 or n==5 or n==7:
-            return True
-        if n<2 or n%2 ==0 or n%3==0 or n%5==0 or n%7==0:
-            return False
-        else:
-            for x in range(11,int(n**0.5)+1,2):
-                if n%x==0:
-                    return False
-            return True
     def isPalindrome(m):
         pal=str(m)[::-1]
         return str(m)==pal
     for i in v.split():
         i=int(i)
-        if isPrime(i) and isPalindrome(i):
+        if isPalindrome(i):
 
             yield 'Palindromic Prime', i
-            yield 'Count', 1
-            yield 'sum', i
 
 def reducefn(k, vs):
     if k=='Palindromic Prime':
         result=[]
     
+        def isPrime(n):
+            if n==2 or n==3 or n==5 or n==7:
+                return True
+            if n<2 or n%2 ==0 or n%3==0 or n%5==0 or n%7==0:
+                return False
+            else:
+                for x in range(11,int(n**0.5)+1,2):
+                    if n%x==0:
+                        return False
+                return True
         for x in vs:
-            result.append(x)
+            if isPrime(x):             
+                result.append(x)
         return sorted(result)
-    if k=='Count':
-        return sum(vs)
-    if k=='sum':
-        return sum(vs)
 
 
 s = mincemeat.Server()
@@ -61,6 +56,8 @@ s.reducefn = reducefn
 
 results = s.run_server(password="changeme")
 print results
+print len(results['Palindromic Prime'])
+print sum(results['Palindromic Prime'])
 
 
 

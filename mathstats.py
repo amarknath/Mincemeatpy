@@ -12,7 +12,7 @@ datasource = dict(enumerate(data))
 
 def mapfn(k, v):
     yield 'count', 1
-    yield 'sum', v
+    yield 'sum', int(v)
     yield 'stddev', int(v)
 def reducefn(k, vs):
     import numpy

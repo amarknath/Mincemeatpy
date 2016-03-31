@@ -14,4 +14,4 @@
 ###To run passCrack.py
 
 1. Pass the hexadecimal string as a command line argument while executing the file.
-2. The program lists all the possibilities of the given first hash value.
+2. The program lists all the possibilities of the given hash value.
